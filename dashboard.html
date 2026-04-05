@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - Fundación Mutua</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    display: flex;
+    height: 100vh;
+    background: #f4f6f9;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: #2c5364;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.sidebar a:hover {
+    background: #203a43;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* TABLAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #2c5364;
+    color: white;
+}
+
+/* SECCIONES */
+.section {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+</style>
+
+<script>
+function mostrar(seccion) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(seccion).classList.add("active");
+}
+
+window.onload = function() {
+    new Chart(document.getElementById("grafica1"), {
+        type: "bar",
+        data: {
+            labels: ["Ene", "Feb", "Mar", "Abr"],
+            datasets: [{
+                label: "Donaciones",
+                data: [5000, 8000, 6000, 9000],
+                backgroundColor: "#2c5364"
+            }]
+        }
+    });
+
+    new Chart(document.getElementById("grafica2"), {
+        type: "pie",
+        data: {
+            labels: ["Alimentos", "Educación", "Salud"],
+            datasets: [{
+                data: [40, 30, 30],
+                backgroundColor: ["#2c5364", "#203a43", "#4ca1af"]
+            }]
+        }
+    });
+};
+</script>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Fundación Mutua</h2>
+
+    <a onclick="mostrar('inicio')">🏠 Inicio</a>
+    <a onclick="mostrar('eventos')">📅 Eventos</a>
+    <a onclick="mostrar('participantes')">👥 Participantes</a>
+    <a onclick="mostrar('donaciones')">💰 Donaciones</a>
+    <a onclick="mostrar('programas')">🎯 Programas</a>
+    <a onclick="mostrar('usuarios')">👤 Usuarios</a>
+    <a href="index.html">🚪 Cerrar sesión</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- HEADER -->
+<div class="header">
+    <div>
+        <h2>Dashboard</h2>
+        <p>Bienvenido al sistema de gestión</p>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+        <span>👤 Juan Pérez</span>
+        <img src="https://i.pravatar.cc/40" style="border-radius:50%;">
+    </div>
+</div>
+
+<!-- INICIO -->
+<div id="inicio" class="section active">
+
+<div class="cards">
+    <div class="card"><h3>Eventos</h3><p>12</p></div>
+    <div class="card"><h3>Donantes</h3><p>25</p></div>
+    <div class="card"><h3>Donaciones</h3><p>$45,000</p></div>
+    <div class="card"><h3>Beneficiarios</h3><p>18</p></div>
+</div>
+
+<div class="card">
+    <h3>Donaciones por mes</h3>
+    <canvas id="grafica1"></canvas>
+</div>
+
+<div class="card">
+    <h3>Eventos por categoría</h3>
+    <canvas id="grafica2"></canvas>
+</div>
+
+</div>
+
+<!-- EVENTOS -->
+<div id="eventos" class="section">
+<div class="card">
+    <h2>Eventos</h2>
+    <button>+ Nuevo Evento</button>
+    <input placeholder="Buscar..." style="width:100%; margin-top:10px;">
+</div>
+
+<div class="card">
+<table>
+<tr><th>Nombre</th><th>Lugar</th><th>Fecha</th><th>Acciones</th></tr>
+<tr><td>Evento Donación</td><td>Centro</td><td>2026-05-10</td><td>✏️ 🗑️</td></tr>
+</table>
+</div>
+</div>
+
+<!-- PARTICIPANTES -->
+<div id="participantes" class="section">
+<div class="card">
+    <h2>Participantes</h2>
+    <button>+ Agregar</button>
+</div>
+
+<div class="card">
+<table>
+<tr><th>Nombre</th><th>Teléfono</th><th>Correo</th></tr>
+<tr><td>Carlos</td><td>444123</td><td>correo@mail.com</td></tr>
+</table>
+</div>
+</div>
+
+<!-- DONACIONES -->
+<div id="donaciones" class="section">
+<div class="card">
+    <h2>Donaciones</h2>
+    <button>+ Registrar</button>
+</div>
+
+<div class="card">
+<table>
+<tr><th>Donante</th><th>Monto</th><th>Fecha</th></tr>
+<tr><td>Empresa XYZ</td><td>$5000</td><td>2026-05-10</td></tr>
+</table>
+</div>
+</div>
+
+<!-- PROGRAMAS -->
+<div id="programas" class="section">
+<div class="card">
+    <h2>Programas</h2>
+    <button>+ Crear Programa</button>
+</div>
+
+<div class="card">
+<ul>
+<li>Apoyo alimenticio</li>
+<li>Educación básica</li>
+</ul>
+</div>
+</div>
+
+<!-- USUARIOS -->
+<div id="usuarios" class="section">
+<div class="card">
+    <h2>Usuarios</h2>
+    <button>+ Nuevo Usuario</button>
+</div>
+
+<div class="card">
+<table>
+<tr><th>Usuario</th><th>Rol</th></tr>
+<tr><td>admin</td><td>Administrador</td></tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

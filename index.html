@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login - Fundación Mutua</title>
+
+</head>
+<body background="logo.png">
+
+    <div class="login-container">
+        <img src="logo.png" alt="Fundación Mutua" class="logo">
+        <h2>Fundación Mutua</h2>
+
+        <form action="login.php" method="POST">
+            <input type="text" name="usuario" placeholder="Usuario" required>
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
+            <button type="submit" onclick="window.location.href='dashboard.html'">Iniciar Sesión</button>
+        </form>
+
+        <div class="footer">
+            Sistema de gestión de donaciones
+        </div>
+    </div>
+
+</body>
+</html>
